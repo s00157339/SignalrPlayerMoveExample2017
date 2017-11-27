@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Engine.Engines;
 using Sprites;
 using System.Collections.Generic;
+using GameComponentNS;
 
 namespace MonoGameClient
 {
@@ -43,7 +44,7 @@ namespace MonoGameClient
         {
             // create input engine
             new InputEngine(this);
-
+            new FadeTextManager(this);
             // TODO: Add your initialization logic here change local host to newly created local host
             serverConnection = new HubConnection("http://localhost:53922/");
             serverConnection.StateChanged += ServerConnection_StateChanged;
@@ -161,6 +162,8 @@ namespace MonoGameClient
             new SimplePlayerSprite(this, player, Content.Load<Texture2D>(player.imageName),
                                     new Point(player.playerPosition.X, player.playerPosition.Y));
             connectionMessage = player.playerID + " created ";
+
+            new FadeText(this, Vector2.Zero, "welcome " + player.GamerTag + " you are " + player.imageName);
         }
 
         /// <summary>
@@ -173,6 +176,7 @@ namespace MonoGameClient
             Services.AddService<SpriteBatch>(spriteBatch);
 
             font = Content.Load<SpriteFont>("Message");
+            Services.AddService<SpriteFont>(font);
             
         }
 
