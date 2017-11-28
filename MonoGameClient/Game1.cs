@@ -46,7 +46,8 @@ namespace MonoGameClient
             new InputEngine(this);
             new FadeTextManager(this);
             // TODO: Add your initialization logic here change local host to newly created local host
-            serverConnection = new HubConnection("http://localhost:53922/");
+            // serverConnection = new HubConnection("http://localhost:53922/");
+            serverConnection = new HubConnection("http://s00157339gameserver.azurewebsites.net");
             serverConnection.StateChanged += ServerConnection_StateChanged;
             proxy = serverConnection.CreateHubProxy("GameHub");
             serverConnection.Start();
